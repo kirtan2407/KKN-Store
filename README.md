@@ -158,23 +158,24 @@ KKN_STORE/
 │   │   │   └── screens/
 │   │   │       ├── login/
 │   │   │       │   └── Widgets/
-│   │   │       │       └── loginscreen.dart
+|   |   |       |   |    |__login_header.dart
+│   │   │       │   └── loginscreen.dart
 │   │   │       ├── onboarding/
 │   │   │       │   └── widgets/
-│   │   │       │       ├── onboarding_navigation.dart
-│   │   │       │       ├── onboarding_nextpage_button.dart
-│   │   │       │       ├── onboarding_skip.dart
-│   │   │       │       ├── onboarding_pages.dart
-│   │   │       │       └── onboarding.dart
+│   │   │       │   |   ├── onboarding_navigation.dart
+│   │   │       │   |   ├── onboarding_nextpage_button.dart
+│   │   │       │   |   ├── onboarding_skip.dart
+│   │   │       │   |   ├── onboarding_pages.dart
+│   │   │       │   └── onboarding.dart
 │   │   │       ├── password_authetication/
 │   │   │       │   ├── forgot_password.dart
 │   │   │       │   └── reset_password.dart
 │   │   │       └── singup/
 │   │   │           └── widgets/
-│   │   │               ├── singup_form.dart
-│   │   │               ├── term&condition_checkbox.dart
-│   │   │               ├── singupscreen.dart
-│   │   │               └── varify_email.dart
+│   │   │           |     ├── singup_form.dart
+│   │   │           |     ├── term&condition_checkbox.dart
+│   │   │           ├── singupscreen.dart
+│   │   │           └── varify_email.dart
 │   │   ├── personalization/
 │   │   │   ├── controller/
 │   │   │   ├── models/
@@ -183,7 +184,8 @@ KKN_STORE/
 │   │   │       ├── profile/
 │   │   │       │   └── Widgets/
 │   │   │       │       └── profile_menu.dart
-│   │   │       └── settings.dart
+│   │   │       └── settings
+|   |   |           |__settings.dart
 │   │   └── shop/
 │   │       ├── controller/
 │   │       │   └── home_controller.dart
@@ -205,9 +207,9 @@ KKN_STORE/
 │   │                   ├── category_tab.dart
 │   │                   ├── TCard.dart
 │   │                   └── store.dart
-│   └── wishlist/
-│       └── widgets/
-│           └── wishlist.dart
+│   |              wishlist/
+│   |                    └── widgets/
+│   |                            └── wishlist.dart
 │   ├── localization/
 │   ├── utils/
 │   │   ├── constants/
@@ -232,18 +234,18 @@ KKN_STORE/
 │   │   ├── logging/
 │   │   │   └── logger.dart
 │   │   └── theme/
-│   │       ├── Custom_themes/
-│   │       │   ├── appbar_theme.dart
-│   │       │   ├── bottom_sheet_theme.dart
-│   │       │   ├── checkbox_theme.dart
-│   │       │   ├── chip_theme.dart
-│   │       │   ├── elevated_button_theme.dart
-│   │       │   ├── outlined_button_theme.dart
-│   │       │   ├── text_theme.dart
-│   │       │   ├── textfield_theme.dart
-│   │       │   └── theme.dart
-│   │       └── theme.dart
-│   ├── validators/
+│   │   │    ├── Custom_themes/
+│   │   │    │   ├── appbar_theme.dart
+│   │   │    │   ├── bottom_sheet_theme.dart
+│   │   │    │   ├── checkbox_theme.dart
+│   │   │    │   ├── chip_theme.dart
+│   │   │    │   ├── elevated_button_theme.dart
+│   │   │    │   ├── outlined_button_theme.dart
+│   │   │    │   ├── text_theme.dart
+│   │   │    │   ├── textfield_theme.dart
+│   │   │    │   └── theme.dart
+│   │   │    └── theme.dart
+│   │   ├── validators/
 │   │   └── validation.dart
 │   ├── app.dart
 │   ├── main.dart
