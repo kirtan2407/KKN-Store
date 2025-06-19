@@ -1,8 +1,12 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kkn_store/common/widgets/brands/brand_show_case.dart';
 import 'package:kkn_store/common/widgets/layout/grid_layout.dart';
 import 'package:kkn_store/common/widgets/products.cart/products_card/product_vertical.dart';
 import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
+import 'package:kkn_store/features/shop/screens/Product_details/product_details.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
@@ -29,7 +33,10 @@ class TCategoryTab extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems),
 
               /// ---haedings---
-              TSectionHeading(title: 'You might like', onPressed: () {}),
+              TSectionHeading(
+                title: 'You might like',
+                onPressed: () {},
+              ),
               const SizedBox(height: TSizes.spaceBtwItems),
 
               /// ---

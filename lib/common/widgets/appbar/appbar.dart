@@ -36,7 +36,7 @@ class KknAppbar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () => Get.back(),
                   icon: Icon(
                     Icons.arrow_back_ios_new,
-                    color: dark ? TColors.light : TColors.dark,
+                    color: dark ? TColors.primaryColor : TColors.primaryColor,
                   ),
                 )
                 : leadingIcon != null

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kkn_store/common/style/shadows.dart';
 import 'package:kkn_store/common/widgets/icon/TCircular_Icon.dart';
@@ -7,6 +8,7 @@ import 'package:kkn_store/common/widgets/text/product_price_text.dart';
 import 'package:kkn_store/common/widgets/text/product_title.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TPosterImageSet.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TRoundedContainer.dart';
+import 'package:kkn_store/features/shop/screens/Product_details/product_details.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
@@ -21,7 +23,7 @@ class TProductCardVertical extends StatelessWidget {
 
     /// container with side paddings , colors , edgs , radius and shadow.
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetailsScreen()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),

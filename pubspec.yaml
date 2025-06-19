@@ -42,6 +42,8 @@ dependencies:
   flutter_native_splash: ^2.4.6 
   smooth_page_indicator: ^1.2.1
   carousel_slider: ^5.0.0
+  lottie: ^3.3.1
+  image: ^4.5.4
 
 
   # icons
@@ -51,7 +53,8 @@ dependencies:
   # state management
   get: ^4.7.2
   get_storage: ^2.1.1
-  lottie: ^3.3.1
+  video_player: ^2.10.0
+
   
 
   
@@ -83,6 +86,7 @@ flutter:
     - assets/images/products/
     - assets/icons/author_icon/
     - assets/images/user/
+    - assets/images/products/nike/
 
 #----------------Local Fonts--------------------#
 

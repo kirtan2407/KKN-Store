@@ -69,4 +69,18 @@ class TImages {
   static const String nikem = 'assets/images/products/nike_air.png';
   static const String nikejacket = 'assets/images/products/nike_jacket.webp';
   static const String nikeshoes = 'assets/images/products/nike_shoes_1.jpeg';
+
+  //nike products shoes
+  static const String nike0 = 'assets/images/products/nike/video.mp4';
+  static const String nike1 = 'assets/images/products/nike/NIKE_GO_FLYEASE1.avif';
+  static const String nike_1 = 'assets/images/products/nike/NIKE_GO_FLYEASE1.png';
+  static const String nike_2 = 'assets/images/products/nike/NIKE_GO_FLYEASE1.jpg';
+  static const String nike2 = 'assets/images/products/nike/NIKE_GO_FLYEASE2.avif';
+  static const String nike3 = 'assets/images/products/nike/NIKE_GO_FLYEASE3.avif';
+  static const String nike4 = 'assets/images/products/nike/NIKE_GO_FLYEASE4.avif';
+  static const String nike5 = 'assets/images/products/nike/NIKE_GO_FLYEASE5.avif';
+  static const String nike6 = 'assets/images/products/nike/NIKE_GO_FLYEASE6.avif';
+  static const String nike7 = 'assets/images/products/nike/NIKE_GO_FLYEASE7.avif';
+  static const String nike8 = 'assets/images/products/nike/NIKE_GO_FLYEASE8.avif';
+  static const String nike9 = 'assets/images/products/nike/NIKE_GO_FLYEASE9.avif';
 }

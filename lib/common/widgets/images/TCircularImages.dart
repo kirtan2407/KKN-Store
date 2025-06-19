@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
+import 'package:kkn_store/utils/helpers/helper_function.dart';
 
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
@@ -13,7 +14,7 @@ class TCircularImage extends StatelessWidget {
     required this.image,
     this.isNetworkImage = false,
     this.overlayColor,
-    required this.backgroundcolor,
+    this.backgroundcolor,
     this.width = 60,
     this.padding = TSizes.sm,
     this.height = 60,
@@ -29,6 +30,7 @@ class TCircularImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return Container(
       width: width,
       height: height,
