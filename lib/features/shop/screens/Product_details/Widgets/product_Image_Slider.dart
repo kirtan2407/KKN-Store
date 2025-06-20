@@ -63,7 +63,7 @@ class TProductImageSlider extends StatelessWidget {
                         backgroundColor: dark ? TColors.dark : TColors.light,
                         border: Border.all(color: TColors.primaryColor),
                         padding: const EdgeInsets.all(TSizes.sm),
-                        imageUrl: TImages.nike6,
+                        imageUrl: TImages.nike_2,
                       ),
                 ),
               ),

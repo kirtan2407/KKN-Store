@@ -31,6 +31,8 @@ class THelperFunctions {
       return Colors.brown;
     } else if (value == 'Teal') {
       return Colors.teal;
+    } else if (value == 'Gold') {
+      return Color(0xFFFFD700);
     } else if (value == 'Indigo') {
       return Colors.indigo;
     } else {

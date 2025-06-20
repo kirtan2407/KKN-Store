@@ -1,13 +1,13 @@
 flutter_native_splash:
   color: "#FFFFFF"
   color_dark: "#272727"
-  image: assets/logos/kkn_logo_light.png
-  image_dark: assets\logos\kkn_logo_dark.png
+  image: assets/logos/ClickBuy_Light.png
+  image_dark: assets/logos/ClickBuy_Dark.png
 
   android_12:
     color: "#FFFFFF"
     color_dark: "#272727"
-    image: assets/logos/kkn_logo_light.png
-    image_dark: assets\logos\kkn_logo_dark.png
+    image: assets/logos/ClickBuy_Light.png
+    image_dark: assets/logos/ClickBuy_Dark.png
 
   web: false

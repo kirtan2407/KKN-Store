@@ -43,7 +43,7 @@ class TProductCardVertical extends StatelessWidget {
                 children: [
                   /// --- Thambnail Image ---
                   const TRoundedImage(
-                    imageUrl: TImages.product1,
+                    imageUrl: TImages.nike_1,
                     applyImageRadius: true,
                   ),
 
@@ -89,7 +89,8 @@ class TProductCardVertical extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TProductsTitleText(
-                    title: "Red Tape Men's Casual Sneaker Shoes",
+                    title: """Nike Go FlyEas
+Women's Easy On/Off Shoes""",
                     smallSize: true,
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems / 2),
@@ -109,7 +110,7 @@ class TProductCardVertical extends StatelessWidget {
                 /// Price
                 Padding(
                   padding: const EdgeInsets.only(left: TSizes.sm),
-                  child: TProductPriceText(price: '35.0'),
+                  child: TProductPriceText(price: '11 895.00'),
                 ),
 
                 Container(
