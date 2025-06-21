@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kkn_store/common/widgets/appbar/appbar.dart';
 import 'package:kkn_store/common/widgets/custom_shaps/curved_edgs/curved_edge_widgets.dart';
@@ -14,6 +15,7 @@ import 'package:kkn_store/features/shop/screens/Product_details/Widgets/bottom_a
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/product_Image_Slider.dart';
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/product_description.dart';
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/rating_Share_Widget.dart';
+import 'package:kkn_store/features/shop/screens/Product_reviews/product_review.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
@@ -107,7 +109,8 @@ class ProductDetailsScreen extends StatelessWidget {
                         showActionButton: false,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed:
+                            () => Get.to(() => const ProductReviewScreen()),
                         icon: Icon(Iconsax.arrow_right_3, size: 18),
                       ),
                     ],

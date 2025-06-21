@@ -123,4 +123,4 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/logos/ClickBuy_light.png"
+  image_path: "assets/logos/ClickBuy_Light.png"

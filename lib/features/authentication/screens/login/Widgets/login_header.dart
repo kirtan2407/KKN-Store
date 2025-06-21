@@ -4,10 +4,7 @@ import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/constants/texts.dart';
 
 class LoginHeader extends StatelessWidget {
-  const LoginHeader({
-    super.key,
-    required this.dark,
-  });
+  const LoginHeader({super.key, required this.dark});
 
   final bool dark;
 
@@ -19,7 +16,7 @@ class LoginHeader extends StatelessWidget {
         Image(
           height: 150,
           image: AssetImage(
-            dark ? TImages.darkAppLogo : TImages.lightAppLogo,
+            dark ? TImages.darkAppLogoClickBuy : TImages.lightAppLogoClickBuy,
           ),
         ),
         Text(
