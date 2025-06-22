@@ -14,6 +14,13 @@ class TImages {
   static const String darkAppLogoClickBuy = 'assets/logos/ClickBuy_Dark.png';
   static const String lightAppLogoClickBuy = 'assets/logos/ClickBuy_Light.png';
 
+  // ---Payments App Icons ---
+  static const String paypal = 'assets/icons/payments/paypal1.png';
+  static const String paypal1 = 'assets/icons/payments/paypal.png';
+  static const String successLottie1 = 'assets/icons/payments/success.lottie';
+  static const String successLottie =
+      'https://lottie.host/25eedaba-2921-4627-b5c9-65ef02fdf88b/ytnjudr0Da.lottie';
+
   // -- social media icons
   static const String google = 'assets/icons/author_icon/google.png';
   static const String facebook = 'assets/icons/author_icon/facebook.png';

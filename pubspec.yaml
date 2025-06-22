@@ -77,17 +77,20 @@ flutter:
 
 #----------------Local Assets------------------#
   assets:
-    - assets/images/
+    
     - assets/logos/
+    - assets/icons/
     - assets/icons/brands/
     - assets/icons/categories/
-    - assets/icons/
+    - assets/icons/author_icon/
+    - assets/images/
+    - assets/images/user/
     - assets/images/onboarding/
     - assets/images/poster/
     - assets/images/products/
-    - assets/icons/author_icon/
-    - assets/images/user/
+    - assets/icons/payments/
     - assets/images/products/nike/
+    
     
 
 #----------------Local Fonts--------------------#

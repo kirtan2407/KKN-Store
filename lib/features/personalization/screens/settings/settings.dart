@@ -6,6 +6,7 @@ import 'package:kkn_store/common/widgets/custom_shaps/container/primary_header_c
 import 'package:kkn_store/common/widgets/list-tile/settings_menu_tile.dart';
 import 'package:kkn_store/common/widgets/list-tile/userprofilelisttile.dart';
 import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
+import 'package:kkn_store/features/personalization/screens/address/adress.dart';
 import 'package:kkn_store/features/personalization/screens/profile/profile.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
@@ -35,7 +36,10 @@ class SettingScreen extends StatelessWidget {
                   ),
 
                   ///user Profile Card
-                  UserProfileTile(dark: dark,onPressed:() => Get.to(() => const ProfileScreen(),),),
+                  UserProfileTile(
+                    dark: dark,
+                    onPressed: () => Get.to(() => const ProfileScreen()),
+                  ),
                   const SizedBox(height: TSizes.spaceBtwsections),
                 ],
               ),
@@ -57,6 +61,7 @@ class SettingScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subTitle: 'Set shopping delivery address',
+                    onTap: () => Get.to(() => const UserAddressSscreen()),
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.shopping_cart,
