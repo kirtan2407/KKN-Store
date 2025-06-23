@@ -61,6 +61,9 @@ dependencies:
   carousel_slider: ^5.0.0
   flutter_rating_bar: ^4.0.1
 
+  # firebase
+  firebase_core: ^3.14.0
+
 
 
   #--------------------- ./End Packages ------------------#
