@@ -8,6 +8,7 @@ import 'package:kkn_store/common/widgets/list-tile/userprofilelisttile.dart';
 import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
 import 'package:kkn_store/features/personalization/screens/address/adress.dart';
 import 'package:kkn_store/features/personalization/screens/profile/profile.dart';
+import 'package:kkn_store/features/shop/screens/Order/order.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 
@@ -72,6 +73,7 @@ class SettingScreen extends StatelessWidget {
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subTitle: 'In-progress and Completed Orders',
+                    onTap: ()=>Get.to(()=> const OrderScreen()),
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.bank,

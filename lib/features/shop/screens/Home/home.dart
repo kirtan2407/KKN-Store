@@ -21,6 +21,7 @@ import 'package:kkn_store/features/shop/screens/Home/widgets/home_appbar.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/home_slider.dart';
 import 'package:kkn_store/common/widgets/products.cart/products_card/product_vertical.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/searchbar.dart';
+import 'package:kkn_store/features/shop/screens/all_products/all_products.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
@@ -89,14 +90,16 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwsections),
 
                   /// --- Heading ---
-                  TSectionHeading(title: 'Popular Products', onPressed: () {}),
+                  TSectionHeading(
+                    title: 'Popular Products',
+                    onPressed: () => Get.to(() => const AllProducts()),
+                  ),
                   const SizedBox(height: TSizes.spaceBtwItems),
 
                   /// --- popular products
                   TGridLayout(
                     itemCount: 10,
                     itemBuilder: (_, index) => const TProductCardVertical(),
-                    
                   ),
                 ],
               ),

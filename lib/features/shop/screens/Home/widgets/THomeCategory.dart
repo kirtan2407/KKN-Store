@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kkn_store/common/widgets/image.text/image_text.dart';
+import 'package:kkn_store/features/shop/screens/Sub_Category/sub_categories.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 
 class THomeCategories extends StatelessWidget {
@@ -32,7 +34,7 @@ class THomeCategories extends StatelessWidget {
           return TVerticalImageText(
             image: category['image']!,
             title: category['title']!,
-            onTap: () {},
+            onTap: () => Get.to(() => const SubCategoriesScreen()),
           );
         },
       ),

@@ -22,7 +22,7 @@ class TPromoslider extends StatelessWidget {
           options: CarouselOptions(
             viewportFraction: 1, // Corrected key
             enableInfiniteScroll: true,
-            autoPlay: false,
+            autoPlay: true,
             onPageChanged: (index, _) => controller.updatePageIndicator(index),
           ),
           items: banners.map((url) => TRoundedImage(imageUrl: url)).toList(),

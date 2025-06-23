@@ -16,6 +16,7 @@ import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
+import 'package:lottie/lottie.dart';
 
 class CheckOutScreen extends StatelessWidget {
   const CheckOutScreen({super.key});
@@ -83,7 +84,7 @@ class CheckOutScreen extends StatelessWidget {
           onPressed:
               () => Get.to(
                 () => SuccessScreen(
-                  image: TImages.successLottie,
+                  image: TImages.successLottie11,
                   title: 'Payment Success!',
                   subTitle: 'Your item will be shipped soon!',
                   onPressed: () => Get.offAll(() => const NavigationMenu()),

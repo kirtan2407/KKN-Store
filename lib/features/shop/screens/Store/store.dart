@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kkn_store/common/widgets/appbar/TabBar.dart';
 import 'package:kkn_store/common/widgets/appbar/appbar.dart';
 import 'package:kkn_store/common/widgets/brands/brand_show_case.dart';
@@ -9,6 +10,7 @@ import 'package:kkn_store/common/widgets/layout/grid_layout.dart';
 import 'package:kkn_store/common/widgets/products.cart/cart/cart_menu_icon.dart';
 import 'package:kkn_store/common/widgets/text/TBrand_title_Text_with_verify_Icon.dart';
 import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
+import 'package:kkn_store/features/shop/screens/Brands/all_brands.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TRoundedContainer.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/home_appbar.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/searchbar.dart';
@@ -75,7 +77,7 @@ class StoreScreen extends StatelessWidget {
                       /// --- Feature Brands ---
                       TSectionHeading(
                         title: 'Feature Brands',
-                        onPressed: () {},
+                        onPressed: () => Get.to(() => const AllBrands()),
                       ),
                       const SizedBox(height: TSizes.spaceBtwItems / 2),
 

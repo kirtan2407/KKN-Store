@@ -113,6 +113,7 @@ Women's Easy On/Off Shoes""",
                   child: TProductPriceText(price: '11 895.00'),
                 ),
 
+                /// Add to cart button
                 Container(
                   decoration: const BoxDecoration(
                     color: TColors.dark,
