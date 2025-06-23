@@ -109,6 +109,8 @@ KKN_STORE/
 │   │       │   └── TabBar.dart
 │   │       ├── brands/
 │   │       │   └── brand_show_case.dart
+│   │       ├── choice_chip/
+│   │       │   └── choice_chip.dart
 │   │       ├── custom_shapes/
 │   │       │   ├── container/
 │   │       │   │   ├── circular_container.dart
@@ -200,16 +202,53 @@ KKN_STORE/
 │   │           │       ├── TPosterImageSet.dart
 │   │           │       ├── TRoundedContainer.dart
 │   │           │       ├── home.dart
-│   │           │       └── product_list.dart
-│   │           ├── Profile \ Widgets/  <-- Note: This might be an unintended folder name, consider renaming to 'Profile Widgets'
+│   │           │       └── product_list.dart  
 │   │           └── Store/
-│   │               └── widgets/
-│   │                   ├── category_tab.dart
-│   │                   ├── TCard.dart
-│   │                   └── store.dart
-│   |              wishlist/
-│   |                    └── widgets/
-│   |                            └── wishlist.dart
+│   │           |   └── widgets/
+│   │           |       ├── category_tab.dart
+│   │           |       ├── TCard.dart
+│   │           |       └── store.dart
+|   |           └── Sub_category/
+│   │           |        └── sub_category.dart
+|   |           |
+│   |           └── wishlist/
+│   |           |        └── widgets/
+│   |           |                └── wishlist.dart
+│   │           └── Product_review/
+│   │           |    |   └── widgets/
+│   │           |    |     ├── all_over_rating.dart
+│   │           |    |     ├── one_indicator_bar.dart
+│   │           |    |     └── user_review_card.dart
+|   |           |    └── product_review.dart
+|   |           └── product_details/
+|   |           |    |   └── widgets/
+|   |           |    |     ├── bottom_add_to_cart.dart
+|   |           |    |     ├── product_Attribute.dart
+|   |           |    |     ├── product_description.dart
+|   |           |    |     ├── product_image_slider.dart
+|   |           |    |     ├── product_meta_data.dart
+|   |           |    |     └── Rating_Share_widgets.dart
+|   |           |    └──product_details.dart
+│   │           └── order/
+│   │           |    |   └── widgets/
+│   │           |    |     ├── order_list.dart
+│   │           |    └── order_status.dart
+│   │           └── Checkout/
+│   │           |    |   └── widgets/
+│   │           |    |     ├── billing_address_section.dart
+│   │           |    |     ├── billing_amount_section.dart
+│   │           |    |     ├── billing_payment_section.dart
+│   │           |    └── checkout.dart
+│   │           └── Brands/
+│   │           |       ├──all_brands.dart
+│   │           |       └──brands_products.dart
+│   │           └── all_products/
+|   |           |        └──all_products.dart
+|   |           └── cart/
+│   │           |    |  └── widgets/
+|   |           |    |         └── cart_items.dart
+|   |           |    └── cart.dart 
+|   |   
 │   ├── localization/
 │   ├── utils/
 │   │   ├── constants/
