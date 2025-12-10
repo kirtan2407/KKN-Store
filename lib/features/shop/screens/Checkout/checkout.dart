@@ -6,6 +6,7 @@ import 'package:kkn_store/common/widgets/appbar/appbar.dart';
 import 'package:kkn_store/common/widgets/products.cart/cart/coupon_code.dart';
 import 'package:kkn_store/common/widgets/success_scren/success_screen.dart';
 import 'package:kkn_store/features/shop/screens/Cart/Widgets/cart_Items.dart';
+import 'package:kkn_store/features/shop/controllers/cart_controller.dart';
 import 'package:kkn_store/features/shop/screens/Checkout/Widgets/billing_address_section.dart';
 import 'package:kkn_store/features/shop/screens/Checkout/Widgets/billing_payment_section.dart';
 import 'package:kkn_store/features/shop/screens/Checkout/Widgets/billing_amount_section.dart';
@@ -28,7 +29,7 @@ class CheckOutScreen extends StatelessWidget {
       appBar: KknAppbar(
         showArrowBack: true,
         title: Text(
-          'Order Riview',
+          'Order Review',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
@@ -74,7 +75,7 @@ class CheckOutScreen extends StatelessWidget {
               // const SizedBox(height: TSizes.spaceBtwsections),
             ],
           ),
-        ),
+        ),  
       ),
 
       /// Checkout Button
@@ -90,9 +91,15 @@ class CheckOutScreen extends StatelessWidget {
                   onPressed: () => Get.offAll(() => const NavigationMenu()),
                 ),
               ),
-          child: Text('CheckOut ₹8989'),
+          child: Obx(() {
+            final subTotal = Get.find<CartController>().totalCartPrice.value;
+            final taxFee = subTotal * 0.18;
+            final total = subTotal + taxFee;
+            return Text('CheckOut ₹${total.toStringAsFixed(1)}');
+          }),
         ),
       ),
     );
   }
 }
+// 

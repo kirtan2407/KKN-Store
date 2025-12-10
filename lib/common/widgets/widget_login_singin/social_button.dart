@@ -10,39 +10,42 @@ class LoginFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: const Image(
-              width: TSizes.iconLg,
-              height: TSizes.iconLg,
-              image: AssetImage(TImages.google),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Image(
+                width: TSizes.iconLg,
+                height: TSizes.iconLg,
+                image: AssetImage(TImages.google),
+              ),
             ),
           ),
-        ),
-        const SizedBox(width: TSizes.spaceBtwItems),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: const Image(
-              width: TSizes.iconLg,
-              height: TSizes.iconLg,
-              image: AssetImage(TImages.facebook),
+          const SizedBox(width: TSizes.spaceBtwItems),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Image(
+                width: TSizes.iconLg,
+                height: TSizes.iconLg,
+                image: AssetImage(TImages.facebook),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -10,12 +10,14 @@ class TVerticalImageText extends StatelessWidget {
     required this.title,
     this.textColor = TColors.white,
     this.backgroundColor,
+    this.isNetworkImage = false,
     this.onTap,
   });
 
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
   @override
@@ -30,7 +32,7 @@ class TVerticalImageText extends StatelessWidget {
             Container(
               width: 56,
               height: 56,
-              padding: EdgeInsets.all(TSizes.sm),
+              padding: const EdgeInsets.all(TSizes.sm),
               decoration: BoxDecoration(
                 color:
                     backgroundColor ?? (dark ? TColors.black : TColors.white),
@@ -38,7 +40,7 @@ class TVerticalImageText extends StatelessWidget {
               ),
               child: Center(
                 child: Image(
-                  image: AssetImage(image),
+                  image: isNetworkImage ? NetworkImage(image) : AssetImage(image) as ImageProvider,
                   fit: BoxFit.cover,
                   // color: dark ? TColors.light : TColors.dark,
                 ),

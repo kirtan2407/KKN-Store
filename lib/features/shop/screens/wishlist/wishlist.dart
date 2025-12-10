@@ -5,6 +5,7 @@ import 'package:kkn_store/common/widgets/appbar/appbar.dart';
 import 'package:kkn_store/common/widgets/icon/TCircular_Icon.dart';
 import 'package:kkn_store/common/widgets/layout/grid_layout.dart';
 import 'package:kkn_store/common/widgets/products.cart/products_card/product_vertical.dart';
+import 'package:kkn_store/features/shop/controllers/wishlist_controller.dart';
 import 'package:kkn_store/features/shop/screens/Home/home.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
@@ -14,9 +15,11 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(WishlistController());
     final dark = THelperFunctions.isDarkMode(context);
+    
     return Scaffold(
-      appBar: KknAppbar(
+      appBar: KknAppbar( 
         title: Text(
           'Wishlist',
           style: Theme.of(context).textTheme.headlineMedium,
@@ -25,7 +28,7 @@ class FavouriteScreen extends StatelessWidget {
           TCircularIcon(
             dark: dark,
             icon: Iconsax.add,
-            onPressed: () => Get.to(const HomeScreen()),
+            onPressed: () => Get.to(() => const HomeScreen()), // Redirect to home to add more
           ),
         ],
       ),
@@ -34,10 +37,28 @@ class FavouriteScreen extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpacing),
           child: Column(
             children: [
-              TGridLayout(
-                itemCount: 5,
-                itemBuilder: (_, index) => TProductCardVertical(),
-              ),
+              Obx(() {
+                if (controller.isLoading.value) return const Center(child: CircularProgressIndicator());
+                
+                if (controller.wishlistProducts.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 100),
+                        Text('Whoops! Wishlist is Empty...', style: Theme.of(context).textTheme.headlineMedium),
+                        const SizedBox(height: TSizes.defaultSpace),
+                        Text('Select any one product like it', style: Theme.of(context).textTheme.bodyMedium),
+                      ],
+                    ),
+                  );
+                }
+
+                return TGridLayout(
+                  itemCount: controller.wishlistProducts.length,
+                  itemBuilder: (_, index) => TProductCardVertical(product: controller.wishlistProducts[index]),
+                );
+              }),
             ],
           ),
         ),

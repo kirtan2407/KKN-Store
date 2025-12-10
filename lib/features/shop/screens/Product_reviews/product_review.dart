@@ -12,7 +12,9 @@ import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/device/device_utility.dart';
 
 class ProductReviewScreen extends StatelessWidget {
-  const ProductReviewScreen({super.key});
+  const ProductReviewScreen({super.key, required this.productId});
+
+  final String productId;
 
   @override
   Widget build(BuildContext context) {

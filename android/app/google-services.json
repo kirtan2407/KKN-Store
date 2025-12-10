@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "273633259586",
+    "project_id": "kknstore-434e8",
+    "storage_bucket": "kknstore-434e8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273633259586:android:66a2a1e9de6b9aef4b7ddb",
+        "android_client_info": {
+          "package_name": "com.example.kkn_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273633259586-mc1iad2ioin60rchdhfo3iopu0npqisb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjW1omKZ4LLkWKEfhp6LXJOWKsqiTnn54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273633259586-mc1iad2ioin60rchdhfo3iopu0npqisb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "273633259586-1hbe3ttu8dk5bbvb9jpl4daar7i2n2o8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kknStore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kkn_store/features/shop/screens/Cart/cart.dart';
+import 'package:kkn_store/features/shop/controllers/cart_controller.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 
@@ -34,11 +35,13 @@ class TCartCounterIcon extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Center(
-                child: Text(
-                  '3',
-                  style: Theme.of(context).textTheme.labelLarge!.apply(
-                    color: dark ? TColors.white : TColors.black,
-                    fontSizeFactor: 0.99,
+                child: Obx(
+                  () => Text(
+                    Get.find<CartController>().noOfCartItems.value.toString(),
+                    style: Theme.of(context).textTheme.labelLarge!.apply(
+                      color: dark ? TColors.white : TColors.black,
+                      fontSizeFactor: 0.99,
+                    ),
                   ),
                 ),
               ),

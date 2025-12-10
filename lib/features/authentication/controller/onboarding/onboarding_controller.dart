@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart'; // ✅ ADD
+import 'package:get_storage/get_storage.dart';
 import 'package:kkn_store/features/authentication/screens/login/loginscreen.dart';
 
 class OnboardingController extends GetxController {

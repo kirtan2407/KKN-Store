@@ -21,6 +21,8 @@ import 'package:kkn_store/features/shop/screens/Home/widgets/home_appbar.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/home_slider.dart';
 import 'package:kkn_store/common/widgets/products.cart/products_card/product_vertical.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/searchbar.dart';
+import 'package:kkn_store/features/shop/controllers/product_controller.dart';
+import 'package:kkn_store/features/shop/controllers/banner_controller.dart';
 import 'package:kkn_store/features/shop/screens/all_products/all_products.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
@@ -34,6 +36,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -80,13 +83,16 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// --- Promo Slider ---
-                  TPromoslider(
-                    banners: [
-                      TImages.poster1,
-                      TImages.poster2,
-                      TImages.poster3,
-                    ],
-                  ),
+                  Obx(() {
+                    final bannerController = Get.put(BannerController());
+                    if (bannerController.isLoading.value) return const Center(child: CircularProgressIndicator());
+                    
+                    if (bannerController.banners.isEmpty) {
+                      return const Center(child: Text('No Banners Found!'));
+                    }
+
+                    return TPromoslider(banners: bannerController.banners);
+                  }),
                   const SizedBox(height: TSizes.spaceBtwsections),
 
                   /// --- Heading ---
@@ -97,10 +103,18 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwItems),
 
                   /// --- popular products
-                  TGridLayout(
-                    itemCount: 10,
-                    itemBuilder: (_, index) => const TProductCardVertical(),
-                  ),
+                  Obx(() {
+                    if (controller.isLoading.value) return const Center(child: CircularProgressIndicator());
+
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(child: Text('No Products Found!', style: Theme.of(context).textTheme.bodyMedium));
+                    }
+
+                    return TGridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (_, index) => TProductCardVertical(product: controller.featuredProducts[index]),
+                    );
+                  }),
                 ],
               ),
             ),

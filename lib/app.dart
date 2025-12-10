@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-// ignore: unused_import
-import 'package:kkn_store/features/authentication/screens/onboarding/onboarding.dart';
-import 'package:kkn_store/utils/theme/theme.dart';
 import 'package:get/get.dart';
-import 'package:kkn_store/splash_wrapper.dart'; // ✅ ADD
-
-
-/// --use this class to setup themes, initial Bindings , an animations and to much
+import 'package:kkn_store/splash_wrapper.dart';
+import 'package:kkn_store/utils/theme/theme.dart';
+import 'package:kkn_store/bindings/general_bindings.dart';
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -17,7 +13,8 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
-      home: const SplashWrapper(), // ✅ Start from wrapper
+      initialBinding: GeneralBindings(),
+      home: const SplashWrapper(),
     );
   }
 }

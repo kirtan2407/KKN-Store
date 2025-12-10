@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 

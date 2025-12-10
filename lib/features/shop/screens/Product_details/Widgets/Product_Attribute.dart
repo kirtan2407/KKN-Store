@@ -3,13 +3,16 @@ import 'package:kkn_store/common/widgets/chicechip/choicechip.dart';
 import 'package:kkn_store/common/widgets/text/product_price_text.dart';
 import 'package:kkn_store/common/widgets/text/product_title.dart';
 import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
+import 'package:kkn_store/features/shop/models/product_model.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TRoundedContainer.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 
 class TProductAttribute extends StatelessWidget {
-  const TProductAttribute({super.key});
+  const TProductAttribute({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class TProductAttribute extends StatelessWidget {
     return Column(
       children: [
         TRoundedContainer(
-          padding: EdgeInsets.all(TSizes.md),
+          padding: const EdgeInsets.all(TSizes.md),
           backgroundColor: dark ? TColors.darkerGrey : TColors.grey,
           child: Column(
             children: [
@@ -43,14 +46,14 @@ class TProductAttribute extends StatelessWidget {
 
                           /// Actual Price
                           Text(
-                            '₹1000',
+                            '₹${product.price}',
                             style: Theme.of(context).textTheme.titleSmall!
                                 .apply(decoration: TextDecoration.lineThrough),
                           ),
                           const SizedBox(width: TSizes.spaceBtwItems),
 
                           /// Sale Price
-                          const TProductPriceText(price: '2000'),
+                          TProductPriceText(price: product.salePrice > 0 ? product.salePrice.toString() : product.price.toString()),
                         ],
                       ),
 
@@ -62,7 +65,7 @@ class TProductAttribute extends StatelessWidget {
                             smallSize: true,
                           ),
                           Text(
-                            'In Stock',
+                            product.stock > 0 ? 'In Stock' : 'Out of Stock',
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           // const SizedBox(width: TSizes.spaceBtwItems),
@@ -75,13 +78,9 @@ class TProductAttribute extends StatelessWidget {
 
               /// Variation Description
               TProductsTitleText(
-                title: """Ditch the laces and get outside.These kicks featur
-Nike's revolutionary FlyEase technology,making 
-on-and-off a breeze. With a heel that pivots open for a
-totally hands-free entry, they're great for people with
-limited mobility—or anyone who wants a quicker way to get going. . .""",
+                title: product.description ?? '',
                 smallSize: true,
-                maxLines: 10,
+                maxLines: 4,
               ),
             ],
           ),
@@ -89,11 +88,12 @@ limited mobility—or anyone who wants a quicker way to get going. . .""",
         const SizedBox(height: TSizes.spaceBtwInputFields),
 
         /// --- Attributes
+        // TODO: Implement dynamic attributes based on product data
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TSectionHeading(title: 'Colors', showActionButton: false),
-            SizedBox(height: TSizes.spaceBtwItems / 2),
+            const TSectionHeading(title: 'Colors', showActionButton: false),
+            const SizedBox(height: TSizes.spaceBtwItems / 2),
             Wrap(
               spacing: 8,
               children: [
@@ -107,65 +107,11 @@ limited mobility—or anyone who wants a quicker way to get going. . .""",
                   selected: false,
                   onSelected: (value) {},
                 ),
-                TChoiceChip(
-                  text: 'Blue',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-                TChoiceChip(
-                  text: 'Gold',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
               ],
             ),
             const SizedBox(height: TSizes.spaceBtwInputFields),
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TSectionHeading(title: 'Sizes', showActionButton: false),
-            SizedBox(height: TSizes.spaceBtwItems / 2),
-            Wrap(
-              spacing: 8,
-              children: [
-                TChoiceChip(
-                  text: 'UK 3.5',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-                TChoiceChip(
-                  text: 'UK 4',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-                TChoiceChip(
-                  text: 'UK 4.5',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-                TChoiceChip(
-                  text: 'UK 5',
-                  selected: true,
-                  onSelected: (value) {},
-                ),
-                TChoiceChip(
-                  text: 'UK 5.5',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-                TChoiceChip(
-                  text: 'UK 6',
-                  selected: false,
-                  onSelected: (value) {},
-                  
-                ),
-              ],
-            ),
-          ],
-        ),
-        const SizedBox(width: TSizes.spaceBtwItems),
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kkn_store/common/widgets/custom_shaps/container/circular_container.dart';
 import 'package:kkn_store/features/shop/controller/home_controller.dart';
+import 'package:kkn_store/features/shop/models/banner_model.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TPosterImageSet.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 
@@ -11,7 +12,7 @@ import '../../../../../utils/constants/colors.dart';
 class TPromoslider extends StatelessWidget {
   const TPromoslider({super.key, required this.banners});
 
-  final List<String> banners;
+  final List<BannerModel> banners;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +21,21 @@ class TPromoslider extends StatelessWidget {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            viewportFraction: 1, // Corrected key
+            viewportFraction: 1,
             enableInfiniteScroll: true,
             autoPlay: true,
             onPageChanged: (index, _) => controller.updatePageIndicator(index),
           ),
-          items: banners.map((url) => TRoundedImage(imageUrl: url)).toList(),
+          items: banners.map((banner) => TRoundedImage(
+            imageUrl: banner.imageUrl, 
+            isNetworkImage: true,
+            onPressed: () {
+              // Handle banner tap (e.g., navigate to targetScreen)
+              if (banner.targetScreen.isNotEmpty) {
+                Get.toNamed(banner.targetScreen);
+              }
+            },
+          )).toList(),
         ),
         const SizedBox(height: TSizes.spaceBtwItems),
         Obx(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:kkn_store/common/style/shadows.dart';
 import 'package:kkn_store/common/widgets/icon/TCircular_Icon.dart';
 import 'package:kkn_store/common/widgets/text/TBrand_title_Text_with_verify_Icon.dart';
 import 'package:kkn_store/common/widgets/text/product_price_text.dart';

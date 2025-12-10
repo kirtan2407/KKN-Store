@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kkn_store/common/widgets/appbar/appbar.dart';
 import 'package:kkn_store/common/widgets/images/TCircularImages.dart';
 import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
+import 'package:kkn_store/features/personalization/controllers/profile_controller.dart';
 import 'package:kkn_store/features/personalization/screens/profile/Widgets/profile_menu.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
@@ -14,12 +16,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProfileController());
     final dark = THelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      appBar: KknAppbar(title: Text('Profile'), showArrowBack: true),
+      appBar: const KknAppbar(title: Text('Profile'), showArrowBack: true),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.defaultSpacing),
+          padding: const EdgeInsets.all(TSizes.defaultSpacing),
           child: Column(
             children: [
               /// Profile Picture
@@ -51,16 +55,26 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems),
 
-                    TProfileMenu(
-                      title: 'Name',
-                      value: 'Kirtan Kankotiya',
-                      onPressed: () {},
-                    ),
-                    TProfileMenu(
-                      title: 'Username',
-                      value: 'Kirtan',
-                      onPressed: () {},
-                    ),
+                    Obx(() {
+                      if (controller.isLoading.value) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      final user = controller.userProfile.value;
+                      return Column(
+                        children: [
+                          TProfileMenu(
+                            title: 'Name',
+                            value: user['full_name'] ?? 'N/A',
+                            onPressed: () {},
+                          ),
+                          TProfileMenu(
+                            title: 'Username',
+                            value: user['username'] ?? 'N/A',
+                            onPressed: () {},
+                          ),
+                        ],
+                      );
+                    }),
 
                     /// ---- Divider
                     const SizedBox(height: TSizes.spaceBtwItems / 2),
@@ -74,32 +88,44 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems),
 
-                    TProfileMenu(
-                      title: 'UserId',
-                      value: 'kkn5332',
-                      icon: Iconsax.copy4,
-                      onPressed: () {},
-                    ),
-                    TProfileMenu(
-                      title: 'Email',
-                      value: 'kirtan@kkn.com',
-                      onPressed: () {},
-                    ),
-                    TProfileMenu(
-                      title: 'Phone Number',
-                      value: ' +91 87581 94251',
-                      onPressed: () {},
-                    ),
-                    TProfileMenu(
-                      title: 'Gender',
-                      value: 'Male',
-                      onPressed: () {},
-                    ),
-                    TProfileMenu(
-                      title: 'Date of Birth',
-                      value: '24 Jul 2006',
-                      onPressed: () {},
-                    ),
+                    Obx(() {
+                      final user = controller.userProfile.value;
+                      return Column(
+                        children: [
+                          TProfileMenu(
+                            title: 'UserId',
+                            value: user['id'] ?? 'N/A',
+                            icon: Iconsax.copy4,
+                            onPressed: () {},
+                          ),
+                          TProfileMenu(
+                            title: 'Email',
+                            value: user['email'] ?? 'N/A',
+                            onPressed: () {},
+                          ),
+                          TProfileMenu(
+                            title: 'Phone No',
+                            value: user['phone_number'] ?? 'N/A',
+                            onPressed: () {
+                              Get.defaultDialog();
+                            },
+                          ),
+                          TProfileMenu(
+                            title: 'Gender',
+                            value: user['gender'] ?? 'N/A',
+                            onPressed: () {},
+                          ),
+                          TProfileMenu(
+                            title: 'Date of Birth',
+                            value:
+                                user['dob'] != null
+                                    ? user['dob'].toString().split('T')[0]
+                                    : 'N/A',
+                            onPressed: () {},
+                          ),
+                        ],
+                      );
+                    }),
 
                     ///divider
                     const Divider(),
@@ -107,9 +133,9 @@ class ProfileScreen extends StatelessWidget {
 
                     Center(
                       child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Close Account',
+                        onPressed: () => controller.logout(),
+                        child: const Text(
+                          'Logout',
                           style: TextStyle(
                             color: Colors.red,
                             fontSize: TSizes.fontSizesm,

@@ -15,6 +15,7 @@ import 'package:kkn_store/features/shop/screens/Checkout/checkout.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TPosterImageSet.dart';
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/Product_Attribute.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
+import 'package:kkn_store/features/shop/controllers/cart_controller.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
@@ -41,7 +42,7 @@ class CartScreen extends StatelessWidget {
         padding: const EdgeInsets.all(TSizes.defaultSpace),
         child: ElevatedButton(
           onPressed: () => Get.to(() => const CheckOutScreen()),
-          child: Text('CheckOut ₹8988'),
+          child: Obx(() => Text('CheckOut ₹${Get.find<CartController>().totalCartPrice.value.toStringAsFixed(1)}')),
         ),
       ),
     );

@@ -64,6 +64,10 @@ dependencies:
   # firebase
   firebase_core: ^3.14.0
   shared_preferences: ^2.5.3
+  supabase_flutter: ^2.10.3
+  connectivity_plus: ^7.0.0
+  image_picker: ^1.2.1
+  fluttertoast: ^9.0.0
 
 
 
@@ -79,50 +83,45 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-#----------------Local Assets------------------#
   assets:
-    
     - assets/logos/
     - assets/icons/
     - assets/icons/brands/
     - assets/icons/categories/
     - assets/icons/author_icon/
+    - assets/icons/payments/
     - assets/images/
     - assets/images/user/
     - assets/images/onboarding/
     - assets/images/poster/
     - assets/images/products/
-    - assets/icons/payments/
     - assets/images/products/nike/
-    
-    
-
-#----------------Local Fonts--------------------#
+    - assets/consumer/
 
   fonts:
-  - family: Coolvetica
-    fonts:
-      - asset: assets/fonts/Coolvetica Rg.otf
-        weight: 300
-      - asset: assets/fonts/Coolvetica Rg It.otf
-        weight: 300
-        style: italic
+    - family: Coolvetica
+      fonts:
+        - asset: assets/fonts/Coolvetica Rg.otf
+          weight: 300
+        - asset: assets/fonts/Coolvetica Rg It.otf
+          weight: 300
+          style: italic
 
-  - family: Poppins
-    fonts:
-      - asset: assets/fonts/Poppins-Light.ttf
-        weight: 300
-      - asset: assets/fonts/Poppins-Regular.ttf
-        weight: 400
-      - asset: assets/fonts/Poppins-Medium.ttf
-        weight: 500
-      - asset: assets/fonts/Poppins-MediumItalic.ttf
-        weight: 500
-        style: italic
-      - asset: assets/fonts/Poppins-SemiBold.ttf
-        weight: 600
-      - asset: assets/fonts/Poppins-Bold.ttf
-        weight: 800          
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 800
         
   #
   # For details regarding fonts from package dependencies,

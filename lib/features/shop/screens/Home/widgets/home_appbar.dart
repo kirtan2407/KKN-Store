@@ -1,17 +1,18 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kkn_store/common/widgets/appbar/appbar.dart';
 import 'package:kkn_store/common/widgets/products.cart/cart/cart_menu_icon.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/texts.dart';
+import 'package:kkn_store/features/personalization/controllers/profile_controller.dart';
 
 class THomeAppBar extends StatelessWidget {
-  const THomeAppBar({
-    super.key,
-  });
+  const THomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProfileController());
+
     return KknAppbar(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,18 +25,14 @@ class THomeAppBar extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            TText.homeAppbarSubTitle,
-            style: Theme.of(context).textTheme.headlineSmall!
-                .apply(color: TColors.white),
+            controller.userProfile.value['full_name'] ?? 'User',
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall!.apply(color: TColors.white),
           ),
         ],
       ),
-      actions: [
-        TCartCounterIcon(
-          onPressed: () {},
-          iconColor: TColors.white,
-        ),
-      ],
+      actions: [TCartCounterIcon(onPressed: () {}, iconColor: TColors.white)],
     );
   }
 }

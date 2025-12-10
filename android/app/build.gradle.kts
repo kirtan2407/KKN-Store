@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "com.example.kkn_store"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -19,8 +19,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+    jvmTarget = "17"
     }
+    kotlin {
+        jvmToolchain(17)
+    }
+
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
@@ -45,3 +49,11 @@ android {
 flutter {
     source = "../.."
 }
+
+
+
+// java_home = System.getenv("JAVA_HOME")
+// C:\Program Files\Java\jdk1.8.0_202
+
+
+// C:\Program Files (x86)\Common Files\Oracle\Java\javapath

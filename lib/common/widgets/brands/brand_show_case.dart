@@ -8,23 +8,26 @@ import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 
+import 'package:kkn_store/features/shop/models/brand_model.dart';
+
 class TBrandShowCase extends StatelessWidget {
-  const TBrandShowCase({super.key, required this.dark, required this.images});
+  const TBrandShowCase({super.key, required this.dark, required this.images, required this.brand});
 
   final bool dark;
   final List<String> images;
+  final BrandModel brand;
 
   @override
   Widget build(BuildContext context) {
     return TRoundedContainer(
-      padding: EdgeInsets.all(TSizes.md),
+      padding: const EdgeInsets.all(TSizes.md),
       showBorder: true,
       backgroundColor: Colors.transparent,
       borderColor: TColors.darkGrey,
       margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
       child: Column(
         children: [
-          TBrandCard(dark: dark, showBorder: false),
+          TBrandCard(dark: dark, showBorder: false, brand: brand),
           const SizedBox(height: TSizes.spaceBtwItems),
 
           /// --- Categories --- ///
