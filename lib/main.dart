@@ -24,9 +24,8 @@
 //   runApp(const App());
 // }
 
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:kkn_store/app.dart';
 import 'package:kkn_store/data/repositories/authentication/authentication_repository.dart';
@@ -40,12 +39,12 @@ Future<void> main() async {
 
   // Init Local GetStorage
   await GetStorage.init();
-
+  await dotenv.load();
   // Initialize Supabase (REQUIRED for your hybrid setup)
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
-    url: 'https://epgtmkovzupupqhqfmhq.supabase.co',
-    anonKey: 'sb_publishable_rWVvfmDycXTPeBrpqSWnrQ_AkxTi92m',
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
 
   // Initialize Authentication Repository
