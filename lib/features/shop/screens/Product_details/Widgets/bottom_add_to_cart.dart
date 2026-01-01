@@ -8,14 +8,28 @@ import 'package:get/get.dart';
 import 'package:kkn_store/features/shop/controllers/cart_controller.dart';
 import 'package:kkn_store/features/shop/models/product_model.dart';
 
-class TBottomAddToCart extends StatelessWidget {
+class TBottomAddToCart extends StatefulWidget {
   const TBottomAddToCart({super.key, required this.product});
 
   final ProductModel product;
 
   @override
+  State<TBottomAddToCart> createState() => _TBottomAddToCartState();
+}
+
+class _TBottomAddToCartState extends State<TBottomAddToCart> {
+  @override
+  void initState() {
+    super.initState();
+    final controller = CartController.instance;
+    controller.updateAlreadyAddedProductCount(widget.product);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final controller = CartController.instance;
     final dark = THelperFunctions.isDarkMode(context);
+    
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: TSizes.defaultSpace,
@@ -29,8 +43,6 @@ class TBottomAddToCart extends StatelessWidget {
         ),
       ),
       child: Obx(() {
-        final controller = CartController.instance;
-        controller.updateAlreadyAddedProductCount(product);
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -43,10 +55,17 @@ class TBottomAddToCart extends StatelessWidget {
                   width: 40,
                   height: 40,
                   color: TColors.white,
-                  onPressed: () => controller.productQuantityInCart.value < 1 ? null : controller.productQuantityInCart.value -= 1,
+                  onPressed:
+                      () =>
+                          controller.productQuantityInCart.value < 1
+                              ? null
+                              : controller.productQuantityInCart.value -= 1,
                 ),
                 const SizedBox(width: TSizes.spaceBtwItems),
-                Text(controller.productQuantityInCart.value.toString(), style: Theme.of(context).textTheme.titleSmall),
+                Text(
+                  controller.productQuantityInCart.value.toString(),
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
                 const SizedBox(width: TSizes.spaceBtwItems),
                 TCircularIcon(
                   dark: dark,
@@ -61,13 +80,19 @@ class TBottomAddToCart extends StatelessWidget {
             ),
             // SizedBox(width: TSizes.defaultSpace),
             ElevatedButton(
-              onPressed: controller.productQuantityInCart.value < 1 ? null : () => controller.addToCart(product),
+              onPressed:
+                  controller.productQuantityInCart.value < 1
+                      ? null
+                      : () => controller.addToCart(widget.product),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(TSizes.md),
                 backgroundColor: TColors.dark,
                 side: const BorderSide(color: TColors.black),
               ),
-              child: Text('Add to Cart', style: TextStyle(color: TColors.light)),
+              child: Text(
+                'Add to Cart',
+                style: TextStyle(color: TColors.light),
+              ),
             ),
           ],
         );

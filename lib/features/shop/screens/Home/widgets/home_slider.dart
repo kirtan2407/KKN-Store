@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kkn_store/common/widgets/custom_shaps/container/circular_container.dart';
-import 'package:kkn_store/features/shop/controller/home_controller.dart';
+import 'package:kkn_store/features/shop/controllers/home_controller.dart';
 import 'package:kkn_store/features/shop/models/banner_model.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TPosterImageSet.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
@@ -26,15 +26,30 @@ class TPromoslider extends StatelessWidget {
             autoPlay: true,
             onPageChanged: (index, _) => controller.updatePageIndicator(index),
           ),
-          items: banners.map((banner) => TRoundedImage(
-            imageUrl: banner.imageUrl, 
-            isNetworkImage: true,
-            onPressed: () {
-              // Handle banner tap (e.g., navigate to targetScreen)
-              if (banner.targetScreen.isNotEmpty) {
-                Get.toNamed(banner.targetScreen);
-              }
-            },
+          items: banners.map((banner) => Container(
+            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5), // Added margin for shadow visibility
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: TRoundedImage(
+              imageUrl: banner.imageUrl, 
+              isNetworkImage: true,
+              applyImageRadius: true,
+              borderRadius: TSizes.cardRadiusLg,
+              onPressed: () {
+                // Handle banner tap (e.g., navigate to targetScreen)
+                if (banner.targetScreen.isNotEmpty) {
+                  Get.toNamed(banner.targetScreen);
+                }
+              },
+            ),
           )).toList(),
         ),
         const SizedBox(height: TSizes.spaceBtwItems),

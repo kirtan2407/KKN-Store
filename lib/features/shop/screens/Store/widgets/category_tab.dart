@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kkn_store/common/widgets/brands/brand_show_case.dart';
-import 'package:kkn_store/common/widgets/layout/grid_layout.dart';
-import 'package:kkn_store/common/widgets/products.cart/products_card/product_vertical.dart';
+import 'package:kkn_store/common/widgets/products.cart/sorttable/sortable_products.dart';
 import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
+import 'package:kkn_store/features/shop/controllers/all_products_controller.dart';
 import 'package:kkn_store/features/shop/controllers/category_controller.dart';
 import 'package:kkn_store/features/shop/controllers/product_controller.dart';
-import 'package:kkn_store/features/shop/controllers/brand_controller.dart';
 import 'package:kkn_store/features/shop/models/category_model.dart';
 import 'package:kkn_store/features/shop/models/product_model.dart';
-import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 
@@ -20,8 +17,8 @@ class TCategoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _ = CategoryController.instance;
-    final dark = THelperFunctions.isDarkMode(context);
+    CategoryController.instance;
+    THelperFunctions.isDarkMode(context);
     
     // Fetch products for this category (Mocking for now or implement in controller)
     // For now, we will use the dummy products from the controller or fetch specific ones
@@ -35,38 +32,13 @@ class TCategoryTab extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpacing),
           child: Column(
             children: [
-              /// ---brands---
-              /// ---brands---
-              Obx(() {
-                final brandController = Get.put(BrandController());
-                if (brandController.isLoading.value) return const Center(child: CircularProgressIndicator());
-                
-                if (brandController.featuredBrands.isEmpty) {
-                  return const SizedBox();
-                }
-
-                // Display first 2 featured brands for now
-                return Column(
-                  children: brandController.featuredBrands.take(2).map((brand) {
-                    return TBrandShowCase(
-                      dark: dark,
-                      brand: brand,
-                      images: [TImages.nikeshoes, TImages.nikejacket, TImages.nikem], // TODO: Fetch real top product images for this brand
-                    );
-                  }).toList(),
-                );
-              }),
-              const SizedBox(height: TSizes.spaceBtwItems),
-
               /// ---haedings---
               TSectionHeading(
                 title: 'You might like',
                 onPressed: () {},
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
-
-              /// ---
-              /// ---
+              /// --- Products List ---
               FutureBuilder(
                 future: Get.put(ProductController()).fetchProductsByCategory(category.id),
                 builder: (context, snapshot) {
@@ -81,10 +53,18 @@ class TCategoryTab extends StatelessWidget {
                   }
 
                   final products = snapshot.data as List<ProductModel>;
-                  return TGridLayout(
-                    itemCount: products.length,
-                    itemBuilder: (_, index) => TProductCardVertical(product: products[index]),
-                  );
+                  
+                  // Initialize a unique controller for this category using the category ID as a tag
+                  // This ensures each tab has its own independent sorting state
+                  final controller = Get.put(AllProductsController(), tag: category.id);
+                  
+                  // Assign products to this specific controller
+                  if (controller.products.isEmpty || controller.products != products) {
+                      controller.assignProducts(products);
+                  }
+
+                  // Pass the tagged controller to the sortable widget
+                  return TSortableProducts(controller: controller);
                 },
               ),
               const SizedBox(height: TSizes.spaceBtwItems),

@@ -18,7 +18,8 @@ class TImages {
   static const String paypal = 'assets/icons/payments/paypal1.png';
   static const String paypal1 = 'assets/icons/payments/paypal.png';
   static const String successgif = 'assets/icons/payments/success_gif.gif';
-  static const String successLottie11 = 'assets/animations/successlottie.lottie';
+  static const String successLottie11 =
+      'assets/animations/successlottie.lottie';
   static const String successLottie1 = 'assets/icons/payments/success.lottie';
   static const String successLottie =
       'https://lottie.host/25eedaba-2921-4627-b5c9-65ef02fdf88b/ytnjudr0Da.lottie';
@@ -104,4 +105,7 @@ class TImages {
       'assets/images/products/nike/NIKE_GO_FLYEASE8.avif';
   static const String nike9 =
       'assets/images/products/nike/NIKE_GO_FLYEASE9.avif';
+
+  static const String successfulPaymentIcon =
+      'assets/images/payment_sucess.png';
 }

@@ -7,9 +7,15 @@ import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 import 'package:readmore/readmore.dart';
+import 'package:kkn_store/features/shop/models/review_model.dart';
+import 'package:kkn_store/data/repositories/authentication/authentication_repository.dart';
+import 'package:kkn_store/features/shop/controllers/product/review_controller.dart';
+import 'package:get/get.dart';
 
 class UserReviewCard extends StatelessWidget {
-  const UserReviewCard({super.key});
+  const UserReviewCard({super.key, required this.review});
+
+  final ReviewModel review;
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +27,39 @@ class UserReviewCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage(TImages.userAvatar),
+                 CircleAvatar(
+                  backgroundImage: review.userImage != null 
+                     ? NetworkImage(review.userImage!) 
+                     : const AssetImage(TImages.userAvatar) as ImageProvider,
                 ),
                 const SizedBox(width: TSizes.spaceBtwItems),
                 Text(
-                  'Nethan Brown',
+                  review.userName ?? 'User',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ],
             ),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+            if (AuthenticationRepository.instance.authUser?.id == review.userId)
+            PopupMenuButton(
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'edit',
+                  child: Text('Edit'),
+                ),
+                const PopupMenuItem(
+                  value: 'delete',
+                  child: Text('Delete'),
+                ),
+              ],
+              onSelected: (value) {
+                if (value == 'delete') {
+                  Get.put(ReviewController()).deleteReview(review.id, review.productId);
+                } else if (value == 'edit') {
+                  Get.put(ReviewController()).showEditReviewDialog(review);
+                }
+              },
+              icon: const Icon(Icons.more_vert),
+            ),
           ],
         ),
         const SizedBox(height: TSizes.spaceBtwItems),
@@ -39,16 +67,16 @@ class UserReviewCard extends StatelessWidget {
         /// Review
         Row(
           children: [
-            TRatingBarIndicator(rating: 4),
+            TRatingBarIndicator(rating: review.rating),
             const SizedBox(width: TSizes.spaceBtwItems),
-            Text('01 Nov, 2024', style: Theme.of(context).textTheme.bodyMedium),
+            Text(review.createdAt.toString().split(' ')[0], style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: TSizes.spaceBtwItems),
           ],
         ),
         const SizedBox(height: TSizes.spaceBtwItems),
 
         ReadMoreText(
-          "Good for my multiple sclerosis body : First disability shoes I’ve ever bought & I LOVE them. Although I should’ve went up half a size for my compression socks, I have nothing bad to say about them at all! BEST work shoe for hospital workers that are around sick patients!",
+          review.comment ?? '',
           trimLines: 2,
           trimMode: TrimMode.Line,
           trimExpandedText: ' show less',
@@ -66,50 +94,7 @@ class UserReviewCard extends StatelessWidget {
         ),
         const SizedBox(height: TSizes.spaceBtwItems),
 
-        /// Company Review
-        TRoundedContainer(
-          backgroundColor: dark ? TColors.darkerGrey : TColors.grey,
-          child: Padding(
-            padding: const EdgeInsets.all(TSizes.md),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "ClickBuy's Store",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      '02 Nov, 2024',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-
-                ReadMoreText(
-                  "Good for my multiple sclerosis body : First disability shoes I’ve ever bought & I LOVE them. Although I should’ve went up half a size for my compression socks, I have nothing bad to say about them at all! BEST work shoe for hospital workers that are around sick patients!",
-                  trimLines: 2,
-                  trimMode: TrimMode.Line,
-                  trimExpandedText: ' show less',
-                  trimCollapsedText: ' show more',
-                  moreStyle: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: TColors.primaryColor,
-                  ),
-                  lessStyle: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: TColors.primaryColor,
-                  ),
-                ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-              ],
-            ),
-          ),
-        ),
+        // Removed Company Review Dummy Data for simplicity or make it dynamic later
         const SizedBox(height: TSizes.spaceBtwsections),
       ],
     );

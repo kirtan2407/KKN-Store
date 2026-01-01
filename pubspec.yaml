@@ -68,6 +68,10 @@ dependencies:
   connectivity_plus: ^7.0.0
   image_picker: ^1.2.1
   fluttertoast: ^9.0.0
+
+  # payment system cash free 
+  flutter_cashfree_pg_sdk: 2.2.9+47
+  flutter_svg: ^2.2.2
   flutter_dotenv: ^6.0.0
 
   #--------------------- ./End Packages ------------------#
@@ -96,6 +100,7 @@ flutter:
     - assets/images/products/
     - assets/images/products/nike/
     - assets/consumer/
+    - .env
 
   fonts:
     - family: Coolvetica

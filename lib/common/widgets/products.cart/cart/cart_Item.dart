@@ -1,14 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:kkn_store/common/widgets/text/TBrand_title_Text_with_verify_Icon.dart';
 import 'package:kkn_store/common/widgets/text/product_title.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TPosterImageSet.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
-import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 import 'package:kkn_store/features/shop/models/cart_item_model.dart';
-import 'package:kkn_store/features/shop/screens/Home/widgets/TRoundedContainer.dart';
 
 class TCartItem extends StatelessWidget {
   const TCartItem({

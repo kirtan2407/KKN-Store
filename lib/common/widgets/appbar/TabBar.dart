@@ -20,6 +20,8 @@ class TTabBar extends StatelessWidget implements PreferredSizeWidget {
         indicatorColor: TColors.primaryColor,
         labelColor: dark ? TColors.white : TColors.primaryColor,
         unselectedLabelColor: TColors.darkGrey,
+        tabAlignment: TabAlignment.start,
+        padding: EdgeInsets.zero,
       ),
     );
   }

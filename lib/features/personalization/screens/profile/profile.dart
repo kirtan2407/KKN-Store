@@ -31,15 +31,20 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    TCircularImage(
-                      dark: dark,
-                      image: TImages.userAvatar2,
-                      width: 80,
-                      height: 80,
-                      backgroundcolor: dark ? TColors.white : TColors.black,
-                    ),
+                    Obx(() {
+                      final networkImage = controller.userProfile.value['avatar_url'] as String?;
+                      final image = networkImage ?? TImages.userAvatar2;
+                      return TCircularImage(
+                        dark: dark,
+                        image: image,
+                        isNetworkImage: networkImage != null,
+                        width: 80,
+                        height: 80,
+                        backgroundcolor: dark ? TColors.white : TColors.black,
+                      );
+                    }),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => controller.uploadUserProfilePicture(),
                       child: const Text('Change Profile Picture'),
                     ),
 
@@ -65,12 +70,26 @@ class ProfileScreen extends StatelessWidget {
                           TProfileMenu(
                             title: 'Name',
                             value: user['full_name'] ?? 'N/A',
-                            onPressed: () {},
+                            onPressed:
+                                () => _showEditDialog(
+                                  context,
+                                  controller,
+                                  'Full Name',
+                                  'full_name',
+                                  user['full_name'] ?? '',
+                                ),
                           ),
                           TProfileMenu(
                             title: 'Username',
                             value: user['username'] ?? 'N/A',
-                            onPressed: () {},
+                            onPressed:
+                                () => _showEditDialog(
+                                  context,
+                                  controller,
+                                  'Username',
+                                  'username',
+                                  user['username'] ?? '',
+                                ),
                           ),
                         ],
                       );
@@ -101,19 +120,38 @@ class ProfileScreen extends StatelessWidget {
                           TProfileMenu(
                             title: 'Email',
                             value: user['email'] ?? 'N/A',
-                            onPressed: () {},
+                            onPressed:
+                                () => _showEditDialog(
+                                  context,
+                                  controller,
+                                  'Email',
+                                  'email',
+                                  user['email'] ?? '',
+                                ),
                           ),
                           TProfileMenu(
                             title: 'Phone No',
                             value: user['phone_number'] ?? 'N/A',
-                            onPressed: () {
-                              Get.defaultDialog();
-                            },
+                            onPressed:
+                                () => _showEditDialog(
+                                  context,
+                                  controller,
+                                  'Phone Number',
+                                  'phone_number',
+                                  user['phone_number'] ?? '',
+                                ),
                           ),
                           TProfileMenu(
                             title: 'Gender',
                             value: user['gender'] ?? 'N/A',
-                            onPressed: () {},
+                            onPressed:
+                                () => _showEditDialog(
+                                  context,
+                                  controller,
+                                  'Gender',
+                                  'gender',
+                                  user['gender'] ?? '',
+                                ),
                           ),
                           TProfileMenu(
                             title: 'Date of Birth',
@@ -121,7 +159,14 @@ class ProfileScreen extends StatelessWidget {
                                 user['dob'] != null
                                     ? user['dob'].toString().split('T')[0]
                                     : 'N/A',
-                            onPressed: () {},
+                            onPressed:
+                                () => _showEditDialog(
+                                  context,
+                                  controller,
+                                  'Date of Birth (YYYY-MM-DD)',
+                                  'dob',
+                                  user['dob']?.toString().split('T')[0] ?? '',
+                                ),
                           ),
                         ],
                       );
@@ -132,13 +177,66 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: TSizes.spaceBtwItems),
 
                     Center(
-                      child: TextButton(
-                        onPressed: () => controller.logout(),
+                      child: OutlinedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                title: const Text(
+                                  "Confirm Logout",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                content: const Text(
+                                  "Are you sure you want to logout?",
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                actions: [
+                                  // Cancel Button
+                                  TextButton(
+                                    onPressed: () => Get.back(),
+                                    child: const Text("Cancel"),
+                                  ),
+
+                                  // Confirm Logout Button (Outlined Red)
+                                  OutlinedButton(
+                                    onPressed: () {
+                                      Get.back(); // close dialog
+                                      controller.logout(); // logout
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      side: const BorderSide(
+                                        color: Colors.red,
+                                        width: 1.5,
+                                      ),
+                                      foregroundColor: Colors.red,
+                                    ),
+                                    child: const Text("Logout"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.red, width: 1.5),
+                          foregroundColor: Colors.red,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 130,
+                            vertical: 18,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
                         child: const Text(
                           'Logout',
                           style: TextStyle(
-                            color: Colors.red,
                             fontSize: TSizes.fontSizesm,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
@@ -150,6 +248,29 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showEditDialog(
+    BuildContext context,
+    ProfileController controller,
+    String title,
+    String field,
+    String currentValue,
+  ) {
+    final textController = TextEditingController(text: currentValue);
+    Get.defaultDialog(
+      title: 'Update $title',
+      content: TextFormField(
+        controller: textController,
+        decoration: InputDecoration(labelText: title),
+      ),
+      textConfirm: 'Save',
+      textCancel: 'Cancel',
+      onConfirm: () {
+        controller.updateProfileField(field, textController.text.trim());
+        Get.back();
+      },
     );
   }
 }

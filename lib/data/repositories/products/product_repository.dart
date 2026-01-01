@@ -79,4 +79,79 @@ class ProductRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+
+
+  /// Get distinct Brand IDs for selected Categories
+  Future<List<String>> getBrandIdsForCategories(List<String> categoryIds) async {
+    try {
+      final data = await _supabase
+          .from('products')
+          .select('brand_id')
+          .filter('category_id', 'in', categoryIds);
+      
+      // Extract unique IDs
+      final List<String> brandIds = (data as List<dynamic>)
+          .map((e) => e['brand_id'] as String?)
+          .where((id) => id != null && id.isNotEmpty)
+          .cast<String>()
+          .toSet()
+          .toList();
+          
+      return brandIds;
+    } catch (e) {
+      throw 'Something went wrong fetching brands for filter: $e';
+    }
+  }
+  /// Search products with pagination and filters
+  Future<List<ProductModel>> searchProducts({
+    required String query,
+    required int limit,
+    required int offset,
+    List<String>? categoryIds,
+    List<String>? brandIds,
+    double? minPrice,
+    double? maxPrice,
+    double? minSalePercentage,
+    double? maxSalePercentage,
+    double? minRating,
+  }) async {
+    try {
+      var queryBuilder = _supabase.from('products').select('*, brand:brands(*)');
+
+      // 1. Text Search (Case-insensitive)
+      if (query.isNotEmpty) {
+        queryBuilder = queryBuilder.ilike('title', '%$query%');
+      }
+
+      // 2. Category Filter (Multi-Select)
+      if (categoryIds != null && categoryIds.isNotEmpty) {
+        queryBuilder = queryBuilder.filter('category_id', 'in', categoryIds);
+      }
+
+      // 3. Brand Filter (Multi-Select)
+      if (brandIds != null && brandIds.isNotEmpty) {
+        queryBuilder = queryBuilder.filter('brand_id', 'in', brandIds);
+      }
+
+      // 4. Sale Percentage Range
+      if (minSalePercentage != null) {
+        queryBuilder = queryBuilder.gte('sale_percentage', minSalePercentage);
+      }
+       if (maxSalePercentage != null) {
+        queryBuilder = queryBuilder.lte('sale_percentage', maxSalePercentage);
+      }
+
+      // 5. Rating Filter
+      if (minRating != null) {
+        queryBuilder = queryBuilder.gte('average_rating', minRating);
+      }
+
+      // 6. Pagination
+      final data = await queryBuilder.range(offset, offset + limit - 1);
+
+      return (data as List<dynamic>).map((e) => ProductModel.fromJson(e)).toList();
+    } catch (e) {
+      throw 'Error searching products: $e';
+    }
+  }
 }

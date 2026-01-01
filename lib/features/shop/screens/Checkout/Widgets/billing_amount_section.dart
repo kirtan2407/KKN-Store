@@ -12,9 +12,10 @@ class TBillingAmountSection extends StatelessWidget {
     final controller = CartController.instance;
     return Obx(() {
       final subTotal = controller.totalCartPrice.value;
+      final discount = controller.discountAmount.value;
       final shippingFee = 0.0; // TODO: Calculate shipping
-      final taxFee = subTotal * 0.18; // 18% Tax
-      final total = subTotal + shippingFee + taxFee;
+      final taxFee = (subTotal - discount) * 0.18; // 18% Tax on discounted price
+      final total = (subTotal - discount) + shippingFee + taxFee;
 
       return Column(
         children: [
@@ -26,6 +27,22 @@ class TBillingAmountSection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: TSizes.spaceBtwItems / 2),
+          
+          /// Discount
+          if (discount > 0)
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   Text('Discount', style: TextTheme.of(context).bodyMedium),
+                   Text('-₹${discount.toStringAsFixed(1)}', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              const SizedBox(height: TSizes.spaceBtwItems / 2),
+            ],
+          ),
+
 
           /// Shiping Fees
           Row(

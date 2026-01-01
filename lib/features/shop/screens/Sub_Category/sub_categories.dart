@@ -5,6 +5,7 @@ import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TPosterImageSet.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
+import 'package:kkn_store/features/shop/models/product_model.dart';
 
 class SubCategoriesScreen extends StatelessWidget {
   const SubCategoriesScreen({super.key});
@@ -41,7 +42,7 @@ class SubCategoriesScreen extends StatelessWidget {
                         (context, index) =>
                             SizedBox(width: TSizes.spaceBtwItems),
                     itemBuilder:
-                        (context, index) => const TProductCardHorizontal(),
+                        (context, index) => TProductCardHorizontal(product: ProductModel.empty()),
                   ),
                 ),
               ],
@@ -64,7 +65,7 @@ class SubCategoriesScreen extends StatelessWidget {
                         (context, index) =>
                             SizedBox(width: TSizes.spaceBtwItems),
                     itemBuilder:
-                        (context, index) => const TProductCardHorizontal(),
+                        (context, index) => TProductCardHorizontal(product: ProductModel.empty()),
                   ),
                 ),
               ],
@@ -87,7 +88,7 @@ class SubCategoriesScreen extends StatelessWidget {
                         (context, index) =>
                             SizedBox(width: TSizes.spaceBtwItems),
                     itemBuilder:
-                        (context, index) => const TProductCardHorizontal(),
+                        (context, index) => TProductCardHorizontal(product: ProductModel.empty()),
                   ),
                 ),
               ],

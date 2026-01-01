@@ -13,7 +13,23 @@ class CategoryRepository extends GetxController {
       final data = await _supabase.from('categories').select().order('name');
       return (data as List<dynamic>).map((e) => CategoryModel.fromJson(e)).toList();
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      print('DEBUG: Error fetching categories: $e'); // LOG THE ERROR
+      throw 'Something went wrong fetching categories: $e';
+    }
+  }
+
+  /// Get sub categories
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+    try {
+      final data = await _supabase
+          .from('categories')
+          .select()
+          .eq('parent_id', categoryId)
+          .order('name');
+      return (data as List<dynamic>).map((e) => CategoryModel.fromJson(e)).toList();
+    } catch (e) {
+      print('DEBUG: Error fetching sub-categories: $e');
+      throw 'Something went wrong fetching sub-categories';
     }
   }
 }

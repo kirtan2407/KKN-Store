@@ -24,6 +24,7 @@ import 'package:kkn_store/features/shop/screens/Home/widgets/searchbar.dart';
 import 'package:kkn_store/features/shop/controllers/product_controller.dart';
 import 'package:kkn_store/features/shop/controllers/banner_controller.dart';
 import 'package:kkn_store/features/shop/screens/all_products/all_products.dart';
+import 'package:kkn_store/features/shop/screens/search/search.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
@@ -43,37 +44,19 @@ class HomeScreen extends StatelessWidget {
           children: [
             ///header of background theme and curved
             TPrimaryHeaderConatainer(
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    /// --- appbar ---
-                    const THomeAppBar(),
-                    const SizedBox(height: TSizes.spaceBtwsections),
+              child: Column(
+                children: [
+                  /// --- appbar ---
+                  const THomeAppBar(),
+                  const SizedBox(height: TSizes.spaceBtwsections),
 
-                    /// --- Searchbar ---
-                    const TSearchBarContainer(text: 'Search in store'),
-                    const SizedBox(height: TSizes.spaceBtwsections),
-
-                    Padding(
-                      padding: EdgeInsets.only(left: TSizes.defaultSpacing),
-                      child: Column(
-                        children: [
-                          /// --- Heading ---
-                          const TSectionHeading(
-                            title: 'Popular Catagories',
-                            showActionButton: false,
-                            textcolor: TColors.white,
-                          ),
-                          const SizedBox(height: TSizes.spaceBtwItems),
-
-                          /// --- Categorys ---
-                          const THomeCategories(),
-                          SizedBox(height: TSizes.spaceBtwsections),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  /// --- Searchbar ---
+                  TSearchBarContainer(
+                    text: 'Start searching here...',
+                    onTap: () => Get.to(() => const SearchScreen()),
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwsections),
+                ],
               ),
             ),
 
@@ -82,11 +65,13 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.defaultSpacing),
               child: Column(
                 children: [
-                  /// --- Promo Slider ---
+                  /// --- Promo Slider (Banner) ---
                   Obx(() {
                     final bannerController = Get.put(BannerController());
-                    if (bannerController.isLoading.value) return const Center(child: CircularProgressIndicator());
-                    
+                    if (bannerController.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
                     if (bannerController.banners.isEmpty) {
                       return const Center(child: Text('No Banners Found!'));
                     }
@@ -95,24 +80,44 @@ class HomeScreen extends StatelessWidget {
                   }),
                   const SizedBox(height: TSizes.spaceBtwsections),
 
-                  /// --- Heading ---
+                  /// --- Categories ---
+                  const TSectionHeading(
+                    title: 'Categories',
+                    showActionButton: false,
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwItems),
+                  const THomeCategories(),
+                  const SizedBox(height: TSizes.spaceBtwsections),
+
+                  /// --- Popular Products Heading ---
                   TSectionHeading(
-                    title: 'Popular Products',
+                    title: 'Popular',
                     onPressed: () => Get.to(() => const AllProducts()),
+                    showActionButton: true,
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems),
 
                   /// --- popular products
                   Obx(() {
-                    if (controller.isLoading.value) return const Center(child: CircularProgressIndicator());
+                    if (controller.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
                     if (controller.featuredProducts.isEmpty) {
-                      return Center(child: Text('No Products Found!', style: Theme.of(context).textTheme.bodyMedium));
+                      return Center(
+                        child: Text(
+                          'No Products Found!',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      );
                     }
 
                     return TGridLayout(
                       itemCount: controller.featuredProducts.length,
-                      itemBuilder: (_, index) => TProductCardVertical(product: controller.featuredProducts[index]),
+                      itemBuilder:
+                          (_, index) => TProductCardVertical(
+                            product: controller.featuredProducts[index],
+                          ),
                     );
                   }),
                 ],

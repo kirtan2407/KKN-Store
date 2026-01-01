@@ -7,6 +7,7 @@ class CartItemModel {
   String variationId;
   String? brandName;
   Map<String, String>? selectedVariation;
+  int stock; // Added for validation
 
   CartItemModel({
     required this.productId,
@@ -17,6 +18,7 @@ class CartItemModel {
     this.title = '',
     this.brandName,
     this.selectedVariation,
+    this.stock = 0,
   });
 
   static CartItemModel empty() => CartItemModel(productId: '', quantity: 0);
@@ -31,6 +33,7 @@ class CartItemModel {
       'variationId': variationId,
       'brandName': brandName,
       'selectedVariation': selectedVariation,
+      'stock': stock,
     };
   }
 
@@ -46,6 +49,7 @@ class CartItemModel {
       selectedVariation: json['selectedVariation'] != null
           ? Map<String, String>.from(json['selectedVariation'])
           : null,
+      stock: json['stock'] ?? 0,
     );
   }
 }
