@@ -6,13 +6,15 @@ import 'package:kkn_store/common/widgets/text/product_price_text.dart';
 import 'package:kkn_store/common/widgets/text/product_title.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TPosterImageSet.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TRoundedContainer.dart';
+import 'package:kkn_store/features/shop/models/product_model.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
-import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
-  const TProductCardHorizontal({super.key});
+  const TProductCardHorizontal({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,6 @@ class TProductCardHorizontal extends StatelessWidget {
       width: 310,
       padding: const EdgeInsets.all(1),
       decoration: BoxDecoration(
-        // boxShadow: [TShadowStyle.verticalProductShadow],
         borderRadius: BorderRadius.circular(TSizes.productImageRadius),
         color:
             THelperFunctions.isDarkMode(context)
@@ -41,13 +42,15 @@ class TProductCardHorizontal extends StatelessWidget {
                 SizedBox(
                   height: 120,
                   width: 120,
-                  child: const TRoundedImage(
-                    imageUrl: TImages.nike1,
+                  child: TRoundedImage(
+                    imageUrl: product.thumbnail,
                     applyImageRadius: true,
+                    isNetworkImage: true,
                   ),
                 ),
 
                 /// --- Seal Tag ---
+                if (product.salePrice != null && product.salePrice! < product.price)
                 Positioned(
                   top: 12,
                   left: 12,
@@ -59,7 +62,7 @@ class TProductCardHorizontal extends StatelessWidget {
                       vertical: TSizes.xs,
                     ),
                     child: Text(
-                      '25%',
+                      '${((product.price - product.salePrice!) / product.price * 100).round()}%',
                       style: Theme.of(
                         context,
                       ).textTheme.labelLarge!.copyWith(color: TColors.black),
@@ -93,12 +96,11 @@ class TProductCardHorizontal extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TProductsTitleText(
-                        title: '''Nike Go FlyEas
-Women's Easy On/Off Shoes''',
+                        title: product.title,
                         smallSize: true,
                       ),
                       SizedBox(height: TSizes.spaceBtwItems / 2),
-                      TBrandTitleWithVerifiedIcon(title: 'Nike'),
+                      TBrandTitleWithVerifiedIcon(title: product.brand?.name ?? ''),
                     ],
                   ),
 
@@ -108,7 +110,7 @@ Women's Easy On/Off Shoes''',
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
-                        child: const TProductPriceText(price: '11895 - 12995'),
+                        child: TProductPriceText(price: product.price.toString()),
                       ),
 
                       /// Add to cart button

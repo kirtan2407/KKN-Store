@@ -21,10 +21,19 @@ class AddressController extends GetxController {
   final Rx<AddressModel> selectedAddress = AddressModel.empty().obs;
   final addressRepository = Get.put(AddressRepository());
 
+  @override
+  void onInit() {
+    super.onInit();
+    getAllUserAddresses();
+  }
+
   Future<List<AddressModel>> getAllUserAddresses() async {
     try {
       final addresses = await addressRepository.fetchUserAddresses();
-      selectedAddress.value = addresses.firstWhere((element) => element.selectedAddress, orElse: () => AddressModel.empty());
+      selectedAddress.value = addresses.firstWhere(
+        (element) => element.selectedAddress,
+        orElse: () => addresses.isNotEmpty ? addresses.first : AddressModel.empty(),
+      );
       return addresses;
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Address not found', message: e.toString());

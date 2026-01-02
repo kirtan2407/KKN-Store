@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:kkn_store/features/shop/screens/Home/widgets/TRoundedContainer.dart';
 import 'package:kkn_store/utils/constants/colors.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
+import 'package:kkn_store/features/shop/controllers/cart_controller.dart';
+
 
 class TCouponCode extends StatelessWidget {
   const TCouponCode({
@@ -14,6 +15,7 @@ class TCouponCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         final dark = THelperFunctions.isDarkMode(context);
+        final controller = TextEditingController();
 
     return TRoundedContainer(
       showBorder: true,
@@ -38,6 +40,7 @@ class TCouponCode extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: TextFormField(
+                  controller: controller,
                   decoration: const InputDecoration(
                     hintText: 'Have a promo code? Enter here',
                     border: InputBorder.none,
@@ -56,7 +59,11 @@ class TCouponCode extends StatelessWidget {
               width: 85,
               child: OutlinedButton(
                 onPressed: () {
-                  // TODO: Apply promo code logic
+                    final code = controller.text.trim();
+                    if (code.isNotEmpty) {
+                       CartController.instance.applyPromoCode(code);
+                       controller.clear();
+                    }
                 },
                 style: OutlinedButton.styleFrom(
                   foregroundColor:

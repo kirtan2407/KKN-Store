@@ -15,6 +15,10 @@ class ProductModel {
   String? categoryId;
   List<String>? images;
   String productType;
+  // New Fields
+  double averageRating;
+  double salePercentage;
+  int ratingCount;
   // List<ProductAttributeModel>? productAttributes; // Future use
   // List<ProductVariationModel>? productVariations; // Future use
 
@@ -33,12 +37,16 @@ class ProductModel {
     this.categoryId,
     this.images,
     this.productType = 'single',
+    this.averageRating = 0.0,
+    this.salePercentage = 0.0,
+    this.ratingCount = 0,
     // this.productAttributes,
     // this.productVariations,
   });
 
   /// Create Empty func for clean code
-  static ProductModel empty() => ProductModel(id: '', title: '', stock: 0, price: 0, thumbnail: '');
+  static ProductModel empty() =>
+      ProductModel(id: '', title: '', stock: 0, price: 0, thumbnail: '');
 
   /// Json Format
   Map<String, dynamic> toJson() {
@@ -78,8 +86,10 @@ class ProductModel {
       productType: data['product_type'] ?? 'single',
       brand: data['brand'] != null ? BrandModel.fromJson(data['brand']) : null,
       images: data['images'] != null ? List<String>.from(data['images']) : [],
-      // productAttributes: (data['product_attributes'] as List<dynamic>).map((e) => ProductAttributeModel.fromJson(e)).toList(),
-      // productVariations: (data['product_variations'] as List<dynamic>).map((e) => ProductVariationModel.fromJson(e)).toList(),
+      // New fields mapped from DB
+      averageRating: double.parse((data['average_rating'] ?? 0.0).toString()),
+      salePercentage: double.parse((data['sale_percentage'] ?? 0.0).toString()),
+      ratingCount: (data['rating_count'] ?? 0) as int,
     );
   }
 }

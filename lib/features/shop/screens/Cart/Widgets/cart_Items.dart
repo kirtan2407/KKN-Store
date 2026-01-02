@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kkn_store/common/widgets/products.cart/cart/add_remove_button.dart';
-import 'package:kkn_store/common/widgets/products.cart/cart/cart_Item.dart';
+import 'package:kkn_store/common/widgets/products.cart/cart/cart_item.dart';
 import 'package:kkn_store/common/widgets/text/product_price_text.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';

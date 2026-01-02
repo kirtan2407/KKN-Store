@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kkn_store/common/widgets/image.text/image_text.dart';
 import 'package:kkn_store/features/shop/controllers/category_controller.dart';
-import 'package:kkn_store/features/shop/screens/Sub_Category/sub_categories.dart';
+import 'package:kkn_store/features/shop/screens/all_products/category_products.dart';
+import 'package:kkn_store/utils/constants/colors.dart';
+import 'package:kkn_store/utils/helpers/helper_function.dart';
 
 class THomeCategories extends StatelessWidget {
   const THomeCategories({super.key});
@@ -26,13 +28,16 @@ class THomeCategories extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (_, index) {
             final category = controller.featuredCategories[index];
+            final dark = THelperFunctions.isDarkMode(context);
             return TVerticalImageText(
               image: category.image, // Ensure this is a valid URL or asset path
               title: category.name,
+              textColor: dark ? TColors.white : TColors.dark,
+              backgroundColor: dark ? TColors.black : TColors.white,
               // For now, we handle network images in TVerticalImageText or assume assets if local
               // If dynamic, we might need to check if it's http/https to use NetworkImage
               isNetworkImage: true, 
-              onTap: () => Get.to(() => const SubCategoriesScreen()),
+              onTap: () => Get.to(() => CategoryProductsScreen(category: category)),
             );
           },
         ),

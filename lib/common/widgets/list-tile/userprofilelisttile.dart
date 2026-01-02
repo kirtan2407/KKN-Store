@@ -24,14 +24,19 @@ class UserProfileTile extends StatelessWidget {
 
     return ListTile(
       onTap: onPressed, // 👈 THIS enables navigation when tapped
-      leading: TCircularImage(
-        dark: dark,
-        image: TImages.userAvatar2,
-        width: 50,
-        height: 50,
-        padding: TSizes.xs,
-        backgroundcolor: dark ? TColors.white : TColors.black,
-      ),
+      leading: Obx(() {
+        final networkImage =
+            controller.userProfile.value['avatar_url'] as String?;
+        return TCircularImage(
+          dark: dark,
+          image: networkImage ?? TImages.userAvatar2,
+          isNetworkImage: networkImage != null,
+          width: 50,
+          height: 50,
+          padding: TSizes.xs,
+          backgroundcolor: dark ? TColors.black : TColors.white,
+        );
+      }),
       title: Text(
         controller.userProfile.value['full_name'] ?? 'User',
         style: Theme.of(

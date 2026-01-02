@@ -4,6 +4,7 @@ class BrandModel {
   String image;
   bool? isFeatured;
   int? productsCount;
+  String? categoryId;
 
   BrandModel({
     required this.id,
@@ -11,6 +12,7 @@ class BrandModel {
     required this.image,
     this.isFeatured,
     this.productsCount,
+    this.categoryId,
   });
 
   /// Empty Helper Function
@@ -24,6 +26,7 @@ class BrandModel {
       'image': image,
       'products_count': productsCount,
       'is_featured': isFeatured,
+      'category_id': categoryId,
     };
   }
 
@@ -37,6 +40,7 @@ class BrandModel {
       image: data['image'] ?? '',
       isFeatured: data['is_featured'] ?? false,
       productsCount: int.parse((data['products_count'] ?? 0).toString()),
+      categoryId: data['category_id'],
     );
   }
 }

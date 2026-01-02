@@ -18,7 +18,8 @@ class BannerRepository extends GetxController {
           .map((e) => BannerModel.fromJson(e))
           .toList();
     } catch (e) {
-      throw 'Something went wrong while fetching banners.';
+      print('DEBUG: Error fetching banners: $e'); // LOG THE ERROR
+      throw 'Something went wrong while fetching banners: $e';
     }
   }
 }

@@ -18,13 +18,15 @@ import 'package:kkn_store/utils/constants/image_strings.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 import 'package:lottie/lottie.dart';
+import 'package:kkn_store/features/shop/controllers/order_controller.dart';
+import 'package:kkn_store/utils/popups/loaders.dart';
 
 class CheckOutScreen extends StatelessWidget {
   const CheckOutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: KknAppbar(
         showArrowBack: true,
@@ -82,20 +84,55 @@ class CheckOutScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(TSizes.defaultSpace),
         child: ElevatedButton(
-          onPressed:
-              () => Get.to(
-                () => SuccessScreen(
-                  image: TImages.successLottie11,
-                  title: 'Payment Success!',
-                  subTitle: 'Your item will be shipped soon!',
-                  onPressed: () => Get.offAll(() => const NavigationMenu()),
+          onPressed: () {
+            final cartController = CartController.instance;
+            final subTotal = cartController.totalCartPrice.value;
+            final discount = cartController.discountAmount.value;
+            final taxFee = (subTotal - discount) * 0.18;
+            final total = (subTotal - discount) + taxFee;
+
+            if (total <= 0) {
+               TLoaders.warningSnackBar(title: 'Empty Cart', message: 'Add items to checkout.');
+               return;
+            }
+
+            // Show QR Code Dialog
+            Get.defaultDialog(
+              title: 'Scan to Pay',
+              content: Column(
+                children: [
+                   const Text('Scan this QR code to pay', style: TextStyle(fontWeight: FontWeight.bold)),
+                   const SizedBox(height: 16),
+                   // Placeholder QR - Replace with Asset or Network Image
+                   const Icon(Icons.qr_code_2, size: 200, color: Colors.black), 
+                   const SizedBox(height: 16),
+                   Text('Amount: ₹${total.toStringAsFixed(2)}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              confirm: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.back(); // Close Dialog
+                    final orderController = Get.put(OrderController());
+                    orderController.processOrder(total);
+                  }, 
+                  child: const Text('Confirm Payment Paid')
                 ),
               ),
+              cancel: SizedBox(
+                width: double.infinity, 
+                child: OutlinedButton(onPressed: () => Get.back(), child: const Text('Cancel'))
+              ),
+            );
+          },
           child: Obx(() {
-            final subTotal = Get.find<CartController>().totalCartPrice.value;
-            final taxFee = subTotal * 0.18;
-            final total = subTotal + taxFee;
-            return Text('CheckOut ₹${total.toStringAsFixed(1)}');
+            final controller = CartController.instance;
+            final subTotal = controller.totalCartPrice.value;
+            final discount = controller.discountAmount.value;
+            final taxFee = (subTotal - discount) * 0.18;
+            final total = (subTotal - discount) + taxFee;
+            return Text('Pay ₹${total.toStringAsFixed(1)}');
           }),
         ),
       ),

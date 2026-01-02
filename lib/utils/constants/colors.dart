@@ -19,7 +19,7 @@ class TColors {
   // App Text color
   static const Color textPrimary = Color(0xFF333333);
   static const Color textSecondary = Color(0xFF6C757D);
-  static const Color textwhite = Color(0xFFffffff);
+  static const Color textWhite = Color(0xFFffffff);
 
   // App Background color
   static const Color light = Color(0xFFf6f6f6);

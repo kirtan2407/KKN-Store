@@ -3,17 +3,18 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kkn_store/common/widgets/text/reusable_heading.dart';
 import 'package:kkn_store/features/shop/models/product_model.dart';
-import 'package:kkn_store/features/shop/screens/Cart/pin/pin_binding.dart';
-import 'package:kkn_store/features/shop/screens/Cart/pin/pin_view.dart';
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/Product_Attribute.dart';
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/Product_Meta_Data.dart';
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/bottom_add_to_cart.dart';
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/product_Image_Slider.dart';
 import 'package:kkn_store/features/shop/screens/Product_details/Widgets/rating_Share_Widget.dart';
 import 'package:kkn_store/features/shop/screens/Product_reviews/product_review.dart';
+import 'package:kkn_store/features/shop/controllers/product/review_controller.dart';
 import 'package:kkn_store/utils/constants/sizes.dart';
 import 'package:kkn_store/utils/helpers/helper_function.dart';
 import 'package:readmore/readmore.dart';
+import 'package:kkn_store/features/shop/screens/Checkout/checkout.dart';
+import 'package:kkn_store/features/shop/controllers/cart_controller.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key, required this.product});
@@ -22,7 +23,7 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    THelperFunctions.isDarkMode(context);
 
     return Scaffold(
       bottomNavigationBar: TBottomAddToCart(product: product),
@@ -56,7 +57,11 @@ class ProductDetailsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                         final controller = CartController.instance;
+                         controller.addToCart(product);
+                         Get.to(() => const CheckOutScreen());
+                      },
                       child: const Text('CheckOut'),
                     ),
                   ),
@@ -91,10 +96,18 @@ class ProductDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const TSectionHeading(
-                        title: 'Reviews(199)', // TODO: Fetch real review count
-                        showActionButton: false,
-                      ),
+                      Obx(() {
+                        final controller = Get.put(ReviewController());
+                        if (controller.productPageReviewCount.value == 0) {
+                           // Trigger fetch if 0 (or could rely on init, but this ensures it loads)
+                           // NOTE: Better to do this in init or build top level, but for localized update:
+                           controller.fetchProductReviewCount(product.id);
+                        }
+                        return TSectionHeading(
+                          title: 'Reviews(${controller.productPageReviewCount.value})',
+                          showActionButton: false,
+                        );
+                      }),
                       IconButton(
                         onPressed:
                             () => Get.to(

@@ -31,7 +31,7 @@ class TSingleAdress extends StatelessWidget {
           padding: EdgeInsets.all(TSizes.md),
           showBorder: true,
           backgroundColor:
-              selectedAddress ? TColors.primaryColorback : Colors.transparent,
+              selectedAddress ? TColors.primaryColor : Colors.transparent,
           borderColor:
               selectedAddress
                   ? Colors.transparent

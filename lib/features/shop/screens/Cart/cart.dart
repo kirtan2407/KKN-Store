@@ -6,7 +6,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:kkn_store/common/widgets/appbar/appbar.dart';
 import 'package:kkn_store/common/widgets/icon/TCircular_Icon.dart';
 import 'package:kkn_store/common/widgets/products.cart/cart/add_remove_button.dart';
-import 'package:kkn_store/common/widgets/products.cart/cart/cart_Item.dart';
+import 'package:kkn_store/common/widgets/products.cart/cart/cart_item.dart';
 import 'package:kkn_store/common/widgets/text/TBrand_title_Text_with_verify_Icon.dart';
 import 'package:kkn_store/common/widgets/text/product_price_text.dart';
 import 'package:kkn_store/common/widgets/text/product_title.dart';
@@ -34,6 +34,7 @@ class CartScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(TSizes.defaultSpacing),
+        // cart items list / add remove buttons
         child: CartItems(),
       ),
 
